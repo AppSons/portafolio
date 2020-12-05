@@ -22,6 +22,7 @@ export class ProductosService {
         .subscribe( (resp: Producto[]) => {
 
           console.log(resp);
+          this.producto = resp;
 
           this.cargando = false;
         });
