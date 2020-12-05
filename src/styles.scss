@@ -1,7 +1,12 @@
+/*SVG loading*/
+
+svg path,
+svg rect{
+  fill: blue;
+}
 
 
-
-
+/*Animaciones*/
 .animated {
     -webkit-animation-duration: 0.9s;
     animation-duration: 0.9s;
