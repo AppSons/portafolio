@@ -25,6 +25,8 @@ export class ProductosService {
           this.producto = resp;
 
           this.cargando = false;
+         
+          
         });
 
   }
