@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,23 @@ import { Injectable } from '@angular/core';
 })
 export class ProductosService {
 
-  constructor() { }
+  cargando = true;
+
+  constructor( private http: HttpClient ) { 
+
+    this.cargarProductos();
+
+  }
+
+  private cargarProductos() {
+
+    this.http.get('https://angular-html-e1260-default-rtdb.europe-west1.firebasedatabase.app/productos_idx.json')
+        .subscribe( (resp: any) => {
+
+          console.log(resp);
+
+          this.cargando = false;
+        });
+
+  }
 }
