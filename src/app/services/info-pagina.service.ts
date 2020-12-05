@@ -31,7 +31,7 @@ export class InfoPaginaService {
   private cargarEquipo() {
 
     this.http.get('https://angular-html-e1260-default-rtdb.europe-west1.firebasedatabase.app/equipo.json')
-        .subscribe( (resp: any[]) => {
+        .subscribe( (resp: any) => {
           this.equipo = resp;
           console.log(resp);
         });
