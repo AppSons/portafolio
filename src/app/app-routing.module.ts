@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './pages/about/about.component';
 import { ItemsComponent } from './pages/items/items.component';
 import { PortafolioComponent } from './pages/portafolio/portafolio.component';
+import { SearchComponent } from './pages/search/search.component';
 
 const app_routes: Routes = [
     { path: 'home', component: PortafolioComponent },
