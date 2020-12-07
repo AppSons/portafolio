@@ -8,7 +8,7 @@ import { Producto } from '../interfaces/producto.interface';
 export class ProductosService {
 
   cargando = true;
-  producto: Producto[] = [];
+  productos: Producto[] = [];
 
   constructor( private http: HttpClient ) { 
 
@@ -22,7 +22,7 @@ export class ProductosService {
         .subscribe( (resp: Producto[] ) => {
 
           console.log(resp);
-          this.producto = resp;
+          this.productos = resp;
 
           this.cargando = false;
          
