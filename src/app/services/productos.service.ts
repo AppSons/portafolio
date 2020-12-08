@@ -19,13 +19,18 @@ export class ProductosService {
 
   private cargarProductos() {
 
-    this.http.get('https://angular-html-e1260-default-rtdb.europe-west1.firebasedatabase.app/productos_idx.json')
-        .subscribe( (resp: any ) => {
-        
-          this.productos = resp;
-          this.cargando = false;        
-          
-        });
+    return new Promise( ( resolve, reject ) => {
+
+
+        this.http.get('https://angular-html-e1260-default-rtdb.europe-west1.firebasedatabase.app/productos_idx.json')
+            .subscribe( (resp: any ) => {
+            
+              this.productos = resp;
+              this.cargando = false; 
+              resolve();       
+              
+            });
+    });
 
   }
   getProducto( id: string ) {
@@ -35,10 +40,36 @@ export class ProductosService {
 
   buscarProducto( termino:string ) {
 
-    this.productosFiltrado = this.productos.filter( producto => {
-      return true;
-    });
+    if ( this.productos.length === 0 ) {
+       // cargar productos
+       this.cargarProductos().then( () => {
+        //ejecutar despues de tener los productos
+      // Aplicar Filtro
+       this.filtrarProductos( termino );
+       });
+      
+    } else {
+      //aplicar el filtro
+      this.filtrarProductos( termino );
 
-    console.log( this.productosFiltrado );
+    }
+  }
+  private filtrarProductos( termino: string) {
+
+    //console.log( this.productos);
+    this.productosFiltrado = [];
+    //pongo el termino buscado en minúscula
+    termino = termino.toLowerCase();
+
+    this.productos.forEach( prod => {
+
+      //creo constante para utilizar el termino en minuscula
+      const tituloLower = prod.titulo.toLocaleLowerCase();
+
+      if ( prod.categoria.indexOf( termino ) >= 0 || tituloLower.indexOf( termino ) >= 0 ) {
+        this.productosFiltrado.push( prod );
+      }
+
+    });  
   }
 }
