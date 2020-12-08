@@ -9,6 +9,7 @@ export class ProductosService {
 
   cargando = true;
   productos: Producto[] = [];
+  productosFiltrado: Producto[] = [];
 
   constructor( private http: HttpClient ) { 
 
@@ -30,5 +31,14 @@ export class ProductosService {
   getProducto( id: string ) {
     return this.http.get(`https://angular-html-e1260-default-rtdb.europe-west1.firebasedatabase.app/productos/${id}.json`);
 
+  }
+
+  buscarProducto( termino:string ) {
+
+    this.productosFiltrado = this.productos.filter( producto => {
+      return true;
+    });
+
+    console.log( this.productosFiltrado );
   }
 }
